@@ -1,43 +1,57 @@
-# Telegram Parser
+<p align="center">
+    <img src="https://gas-kvas.com/grafic/uploads/posts/2024-01/gas-kvas-com-p-logotip-telegram-na-prozrachnom-fone-21.png" width="100px"/>
+    <h3 align="center">Telegram Parser</h3>
+</p>
 
-Данный скрипт парсит участников групп тг. Для того, чтобы спарсить участников чата, вам необходимо самому быть участником данного чата.
+<p align="center">
+  Парсинг пользователей
+  <br/>
+  из ваших чатов и каналов
+</p>
 
-## Инструкция к запуску скрипта
+<p align="center">
+    <a href="https://stackoverflow.com/users/23589316/sakurajima-mai">
+        <img src="https://img.shields.io/badge/-Stackoverflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white"/></a>
+    <a href="https://www.reddit.com/user/MyMaiSakurajima/">
+        <img src="https://img.shields.io/badge/Reddit-%23FF4500.svg?style=for-the-badge&logo=Reddit&logoColor=white"/></a>
+    <a href="https://t.me/MyMaiSakurajima">
+        <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"/></a>
+    <a href="https://www.twitch.tv/mymaisakurajima">
+        <img src="https://img.shields.io/badge/Twitch-%239146FF.svg?style=for-the-badge&logo=Twitch&logoColor=white"/></a>
+    <a href="https://steamcommunity.com/id/MyMaiSakurajima/">
+        <img src="https://img.shields.io/badge/steam-%23000000.svg?style=for-the-badge&logo=steam&logoColor=white"/></a>
+</p>
 
-Для начала вам необходимо зарегестрироваться на сайте https://my.telegram.org/auth, создать приложение и получить api_id и api_hash.
 
-Далее мы вставляем данные в скрипт, в указанныз местах.
+## ⚡ Использование скрипта
 
-После чего установить пару модулей:
+1. Выполняем ```git clone https://github.com/MyMaiSan/Telegram-Parser.git```
+2. Получаем ```api_id``` и ```api_hash``` с помощью https://my.telegram.org/auth
+3. Вставляем полученные данные в ```config.ini```
+4. Выполняем ```pip install -r requirements.txt```
+5. Запускаем ```parser.py```
+6. Вставляем пришедший от Telegram код
+7. Выбираем чат, участников которого необходимо спарсить
 
-    pip install csv
-      
-    pip install telethon
+## 🔧 Добавление проспама
+```python
+count = 0
 
-ВСЁ! Осталось только запустить, вставить полученный код и выбрать чат для скрапинга.
+message = '' #Текст сообщения для проспама
 
-## Добавление проспама по людям (код кривой, но пойдёт, потому что написан за 1 минуту)
+with open('members.csv') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        if count < 5:
+            if row[0] == "":
+                pass
+            else:
+                client1.send_file(row[0], 'photo.png', caption=message) #Вместо photo.png вставь название своей картинки
 
-Просто нужно вставить этот кусок кода в конце:
+            time.sleep(2)
+            count += 1
 
-        count = 0
-        
-        message = '' #Текст сообщения для проспама
-
-        with open('members.csv') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                if count < 5:
-                    if row[0] == "":
-                        pass
-                    else:
-                        client1.send_file(row[0], 'photo.png', caption=message) #Вместо photo.png вставь название своей картинки
-
-                    time.sleep(2)
-                    count += 1
-
-                elif count == 5:
-                    count = 0
-                    time.sleep(10)
-                    
- 
+        elif count == 5:
+            count = 0
+            time.sleep(10)
+```
