@@ -26,7 +26,7 @@
 ## ⚡ Использование скрипта
 
 1. Выполняем ```git clone https://github.com/MyMaiSan/Telegram-Parser.git```
-2. Получаем ```api_id``` и ```api_hash``` с помощью https://my.telegram.org/auth
+2. Получаем ```api_id``` и ```api_hash``` с помощью [этого сайта](https://my.telegram.org/auth)
 3. Вставляем полученные данные в ```config.ini```
 4. Выполняем ```pip install -r requirements.txt```
 5. Запускаем ```parser.py```
@@ -37,16 +37,15 @@
 ```python
 count = 0
 
-message = '' #Текст сообщения для проспама
+message = 'text' #Текст сообщения для проспама
+photo = 'photo.png' #Фото для проспама
 
 with open('members.csv') as f:
     reader = csv.reader(f)
     for row in reader:
         if count < 5:
-            if row[0] == "":
-                pass
-            else:
-                client.send_file(row[0], 'photo.png', caption=message) #Вместо photo.png вставь название своей картинки
+            if row[0] != "":
+                client.send_file(row[0], photo, caption=message)
 
             time.sleep(2)
             count += 1
