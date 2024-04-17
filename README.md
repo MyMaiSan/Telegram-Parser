@@ -27,7 +27,7 @@
 
 1. Выполняем ```git clone https://github.com/MyMaiSan/Telegram-Parser.git```
 2. Получаем ```api_id``` и ```api_hash``` с помощью [этого сайта](https://my.telegram.org/auth)
-3. Вставляем полученные данные в ```config.ini```
+3. Вставляем полученные данные в ```parser.py```
 4. Выполняем ```pip install -r requirements.txt```
 5. Запускаем ```parser.py```
 6. Вставляем пришедший от Telegram код
